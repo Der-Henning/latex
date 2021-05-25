@@ -1,5 +1,7 @@
 FROM alpine:3.13
-RUN apk add --no-cache texlive
-RUN tlmgr install scheme-full
+ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:$PATH
+RUN apk add --no-cache texlive && \
+  tlmgr update --self && \
+  tlmgr install scheme-full
 WORKDIR /data
 VOLUME ["/data"]
